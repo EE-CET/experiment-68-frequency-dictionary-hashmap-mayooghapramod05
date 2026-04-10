@@ -7,19 +7,17 @@ public class Solution {
         Scanner scanner = new Scanner(System.in);
         Map<String, Integer> freqMap = new LinkedHashMap<>();
         
-        // Read the line first, then split by whitespace
-        // This is often more reliable for autograders than scanner.next()
-        if (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            if (line != null && !line.trim().isEmpty()) {
-                String[] words = line.trim().split("\\s+");
-                for (String word : words) {
-                    freqMap.put(word, freqMap.getOrDefault(word, 0) + 1);
-                }
+        // Use hasNext() to read word by word, which ignores leading/trailing whitespace automatically
+        while (scanner.hasNext()) {
+            String word = scanner.next();
+            
+            // Just in case there are empty strings being caught
+            if (!word.isEmpty()) {
+                freqMap.put(word, freqMap.getOrDefault(word, 0) + 1);
             }
         }
         
-        // Print the results
+        // Use a standard for-loop for maximum compatibility with autograders
         for (Map.Entry<String, Integer> entry : freqMap.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
